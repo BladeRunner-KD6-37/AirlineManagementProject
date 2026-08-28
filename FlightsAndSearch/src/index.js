@@ -11,11 +11,9 @@ const bodyParser = require('body-parser');
     app.use(bodyParser.urlencoded({extended :  true}))
 
     app.listen(PORT, ()=>{
-        console.log(`Servr started at ${PORT}`);
+        console.log(`Server started at ${PORT}`);
         // console.log(process.env);
     })
  }
 
- setupAndStartServer();
-
- 
+ setupAndStartServer();  
