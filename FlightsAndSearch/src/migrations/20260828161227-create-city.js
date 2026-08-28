@@ -10,19 +10,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull :  false
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updatedAt: {  // createdat, updatedat, and id got created by default via sequelize cli
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) { // this is usually for deleting tables from the db
     await queryInterface.dropTable('Cities');
   }
 };
