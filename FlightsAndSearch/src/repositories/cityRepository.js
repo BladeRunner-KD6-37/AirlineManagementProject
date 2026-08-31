@@ -1,29 +1,28 @@
-const { City } = require('../models/index');
+const{ City} = require('../models/index')
 
-class CityRepository {
+// console.log(City)
 
-    async createCity({ name }) {
+class CityRepository{
 
+    async createCity ( { name }) { 
         try {
-            const city = await City.create({ name });
+            const city = City.create( { name }) ;
             return city;
         } catch (error) {
-            throw { error };
+            throw  { error };
         }
     }
 
-    async deleteCity ( cityId ){
+    async deleteCity ( cityId ) { 
 
         try {
-            await City.destroy( { 
-                where  : {
-                    id  : cityId
+            await City.destroy( {
+                where : {
+                    id :  cityId
                 }
-             }); 
-            
+            });
         } catch (error) {
-             throw { error };
-
+            throw { error } ; 
         }
     }
 }

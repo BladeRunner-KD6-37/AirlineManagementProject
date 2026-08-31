@@ -1,10 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const { PORT } = require('./config/serverConfig');
-const {City} = require('./models/index')
 const bodyParser = require('body-parser');
-const CityRepository = require('./repositories/cityRepository')
-
+const CityRepository = require( './repositories/cityRepository');
  const setupAndStartServer =  async ()=>{
 
     const app = express();
@@ -13,16 +11,17 @@ const CityRepository = require('./repositories/cityRepository')
 
     app.listen(PORT, async ()=>{
         console.log(`Server started at ${PORT}`);
-        // await City.create({
-        //     name : "New delhi" // created a new entry in the table
-        // })
-
-        // console.log(process.env);
-
         const repo = new CityRepository();
 
-        // repo.createCity( { name : "Bangalore "}); // creates  new city in the cites table
-        // repo.deleteCity(2); // deletes a city
+        // repo.createCity ( { // to create a city in cities table
+        //     name : "New Delhi"
+        // });
+        
+        // console.log(process.env);
+        repo.deleteCity( 4 ) ;
+        
+
+     
     })
  }
 
