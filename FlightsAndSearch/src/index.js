@@ -21,7 +21,8 @@ const CityRepository = require('./repositories/cityRepository')
 
         const repo = new CityRepository();
 
-        repo.createCity( { name : "Bangalore "}); // creates  new city in the cites table
+        // repo.createCity( { name : "Bangalore "}); // creates  new city in the cites table
+        // repo.deleteCity(2); // deletes a city
     })
  }
 
