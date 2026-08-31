@@ -11,15 +11,15 @@ const CityRepository = require( './repositories/cityRepository');
 
     app.listen(PORT, async ()=>{
         console.log(`Server started at ${PORT}`);
-        const repo = new CityRepository();
+        // const repo = new CityRepository();
 
         // repo.createCity ( { // to create a city in cities table
         //     name : "New Delhi"
         // });
         
         // console.log(process.env);
-        repo.deleteCity( 4 ) ;
-        
+        // repo.deleteCity( 4 ) ;
+
 
      
     })
