@@ -19,7 +19,7 @@ class CityService {
     }
     async updateCity(cityId, data){
         try {
-            const city = await this.CityRepository.updateCity();
+            const city = await this.CityRepository.updateCity(cityId, data);
             return city;
             
         } catch (error) {
@@ -39,9 +39,10 @@ class CityService {
             
         }
     }
-    async deleteCity(){
+    async deleteCity(cityId){
         try {
             const response  = await this.CityRepository.deleteCity(cityId);
+            return true;
             
         } catch (error) {
             console.log("Something went wrong in the service layer");
