@@ -1,6 +1,6 @@
 const { City } = require('../models/index')
 
-console.log(City)
+// console.log(City)
 
 class CityRepository{
 
