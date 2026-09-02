@@ -93,10 +93,15 @@ const destroy = async (req,res)=>{
  const getAll = async(req,res)=>{
 
     try {
-        const cities = await cityService.getAllCities();
+        // const cities = await cityService.getAllCities(req.query);
+        // return res.status(200).json({
+        //     data : cities,
+        //     success : true
+        // })
+        const cities = await cityService.getAllCities( req.query);
         return res.status(200).json({
             data : cities,
-            success : true
+            success :  true
         })
         
     } catch (error) {
