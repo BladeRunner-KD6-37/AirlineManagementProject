@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
     */
 
-    await queryInterface.bulkInsert('Airport',[
+    await queryInterface.bulkInsert('Airports',[
       {
         name : "Kempegowda International Airport",
         cityId : 3,
