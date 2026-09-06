@@ -17,9 +17,7 @@ const prepareAndStartServer =  async ()=>{
 
             // const repository = new UserRepository();
 
-            const service =  new UserService();
-            const newToken = service.createToken({email : "Sanket@admin.com", id : 1});
-            console.log(`New token is ${newToken}`);
+           
         //     token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlNhbmtldEBhZG1pbi5jb20iLCJpZCI6MSwiaWF0IjoxNzg4Njk5OTEzLCJleHAiOjE3ODg3MDM1MTN9.qlYP3iB9ux6ehbwHOYbl8w2oPNUKgzcpgdXkXZqv5Bw"
         //    const response = service.verifyToken(token);
         //    console.log(response);
