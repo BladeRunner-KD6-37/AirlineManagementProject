@@ -54,10 +54,29 @@ class UserService{
         }
     }
 
+    async isAuthenticated (token){
+        try {
+            const response = this.verifyToken(token);
+            if(!response){
+                throw { error : `Invalid token`} ;
+            }
+            const user = await this.userRepository.getById(response.id)
+            if(!user){
+                throw { error : `No user with the corresponding token`}
+            }
+            return user.id;
+            
+        } catch (error) {
+            console.log("Something went wrong in the auth in process");
+            throw error;
+            
+        }
+    }
+
 
     createToken(user){
         try {
-            const result = jwt.sign(user,JWT_KEY, {expiresIn : 30});
+            const result = jwt.sign(user,JWT_KEY, {expiresIn : '1h'});
             return result;            
         } catch (error) {
             console.log("Something went wrong in token creation");
@@ -66,7 +85,7 @@ class UserService{
         }
     }
 
-    verifyToken(){
+    verifyToken(token){
         try {
             const response = jwt.verify(token, JWT_KEY);
             return response;            
@@ -84,6 +103,8 @@ class UserService{
             console.log("Something went wrong in password comparison")
         }
     }
+
+    
 
 
 }
