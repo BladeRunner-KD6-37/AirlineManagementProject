@@ -20,7 +20,11 @@ const prepareAndStartServer =  async ()=>{
             }
 
             // const u1 = await User.findByPk(4);
+            // console.log(u1);
             // const r1 = await Role.findByPk(2);
+            // console.log(r1)
+            // const response =  await u1.hasRole(r1);
+            // console.log(response);
             // // u1.addRole(r1); // sequelize handles it .
             // const response = r1.getUsers();
             // console.log(response)
