@@ -3,7 +3,7 @@ const { PORT, JWT_KEY } = require('./config/serverConfig');
 const bodyParser = require('body-parser');
 const apiRoutes =  require('./routes/index')
 const app = express();
-
+const db = require('./models/index');
 // const userRepository = require('./repositories/user-repository');
 const UserService =  require('./services/user-service');
 
@@ -14,6 +14,9 @@ const prepareAndStartServer =  async ()=>{
         try {
             app.listen(PORT, async()=>{
             console.log(`Server Started on PORT : ${PORT}`);
+            if(process.env.DB_SYNC){
+                db.sequelize.sync({alter :  true})
+            }
 
             // const repository = new UserRepository();
 

@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // define association here for Many to many association, we need to maintain a third table
+      this.belongsToMany(models.Role , {
+        through :  'User_Roles' // sequelize automatically creates a model
+      })
     }
   }
   User.init({
