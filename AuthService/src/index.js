@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const apiRoutes =  require('./routes/index')
 const app = express();
 const db = require('./models/index');
+const {User, Role }= require('./models/index');
 // const userRepository = require('./repositories/user-repository');
 const UserService =  require('./services/user-service');
 
@@ -17,6 +18,13 @@ const prepareAndStartServer =  async ()=>{
             if(process.env.DB_SYNC){
                 db.sequelize.sync({alter :  true})
             }
+
+            // const u1 = await User.findByPk(4);
+            // const r1 = await Role.findByPk(2);
+            // // u1.addRole(r1); // sequelize handles it .
+            // const response = r1.getUsers();
+            // console.log(response)
+
 
             // const repository = new UserRepository();
 
