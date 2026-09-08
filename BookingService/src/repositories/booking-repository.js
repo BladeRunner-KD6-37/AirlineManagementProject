@@ -23,7 +23,12 @@ class BookingRepository {
         }
     }
 
-    async updateBooking(data) {
+    async update(bookingId, data) {
+        try {
+            
+        } catch (error) {
+            
+        }
 
 
     }

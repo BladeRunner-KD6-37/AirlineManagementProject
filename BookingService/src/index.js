@@ -1,7 +1,7 @@
 const express =  require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const  { PORT, DB_SYNC } =  require('./config/serverConfig');
+const  { PORT,  DB_SYNC } =  require('./config/serverConfig');
 const db= require('./models/index');
 const apiRoutes = require('./routes/index');
 
@@ -16,6 +16,7 @@ const setupAndStartServer = async()=>{
         if(DB_SYNC){
             db.sequelize.sync({alter : true}) ;
         } ;
+        
     }) ;
 }
 

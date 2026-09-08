@@ -1,5 +1,6 @@
 module.exports = {
-    ValidationError : require('./errors/validation-error'),
-    AppError :  require('./errors/app-error'),
-    ServiceError : require('./errors/service-error')
+    ValidationError: require('./validation-error'),
+    AppError: require('./app-error'),
+    ServiceError: require('./service-error')
 }
+
