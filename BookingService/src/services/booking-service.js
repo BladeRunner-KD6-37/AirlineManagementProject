@@ -12,7 +12,7 @@ class BookingService{
         
         try {
             const flightId = data.flightId;
-            let getFlightRequestURL = `${FLIGHT_SERVICE_PATH}/api/v1/flights/${flightId}` ;
+            const getFlightRequestURL = `${FLIGHT_SERVICE_PATH}/api/v1/flights/${flightId}` ;
             const response  = await axios.get(getFlightRequestURL) ; // makes a http request to the flightAndSearch server for flight details
             // console.log("FROM BOOKING SERVICES", flight);
             // return flight.data.data ;
@@ -24,8 +24,9 @@ class BookingService{
             const totalCost = priceOfTheFlight * data.noOfSeats;
             const bookingPayload = { ...data, totalCost};
             const booking = await this.bookingRepository.create(bookingPayload);
+            const updateFlightRequestURL = `${FLIGHT_SERVICE_PATH}/api/v1/flights/${booking.flightId}` ;
+            await axios.patch(updateFlightRequestURL, {totalSeats : flightData.totalSeats - booking.noOfSeats}) ;
             return booking;
-            
 
         } catch (error) {
             if(error.name == 'RepositoryError' || error.name == 'ValidationError'){
