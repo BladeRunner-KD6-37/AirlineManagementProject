@@ -1,13 +1,14 @@
 const sender = require('../config/emailConfig');
+const { EMAIL_ID } = require('../config/serverConfig');
 const { TicketRepository } =  require('../repositories/index') ;
 
 
 const repo = new TicketRepository();
 
-const sendBasicEmail = async (mailFrom, mailTo, mailSubject, mailBody)=>{
+const sendBasicEmail = async (mailTo, mailSubject, mailBody)=>{
    try {
      const response = await sender.sendMail({
-        from : mailFrom,
+    from : EMAIL_ID,
         to : mailTo,
         subject : mailSubject,
         text : mailBody
@@ -23,8 +24,8 @@ const sendBasicEmail = async (mailFrom, mailTo, mailSubject, mailBody)=>{
 const fetchPendingEmails = async(timestamp)=>{
 
     try {
-        const response = await repo.getAll();
-        return response
+        const response = await repo.get({status: "PENDING"});
+        return response ;
     } catch (error) {
         console.log(error);
     }
