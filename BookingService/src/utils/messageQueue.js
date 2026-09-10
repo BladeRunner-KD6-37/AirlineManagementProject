@@ -1,0 +1,49 @@
+const amqplib = require('amqplib');
+
+
+// create a channel 
+
+const createChannel = async () => {
+    try {
+        const connection = await amqplib.connect(MESSAGE_BROKER_URL);
+        const channel = await connection.createChannel();
+        await channel.assertExchange('EXCHANGE_NAME', 'direct', false);
+        return channel;
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+const subscribeMessage = async (channel, binding_key, message) => {
+
+    try {
+        const applicationQueue = await channel.assetQueue('QUEUE_NAME');
+        channel.bind(applicationQueue.queue, EXCHANGE_NAME, binding_key); // establish the relationship b/w exchange appplication and application Queue.
+        channel.consume(applicationQueue, msg => {bn
+
+            console.log('received data');
+            console.log(msg.content.toString());
+            channel.ack(msg)
+        })
+    } catch (error) {
+        throw error;
+    }
+
+}
+
+const publishMessage = async  (channel, binding_key, message)=>{
+    try {
+        await channel.assertQueue('QUEUE_NAME') ;
+        await channel.publish(EXCHANGE_NAME, binding_key, Buffer.from(message)) /* Buffer.from(message) ->covert the string or text to binary form so that Rabit MQ can sent it over the network */
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports ={
+    createChannel,
+    subscribeMessage,
+    publishMessage
+}
+

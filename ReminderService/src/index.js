@@ -1,7 +1,7 @@
 const express =  require('express');
 const bodyParser = require('body-parser');
 // const  { sendBasicEmail } = require('./services/email-service');
-
+const { createChannel } = require('./utils/messageQueue') ;
 const apiRoutes = require('./routes/index')
 
 const  { PORT }= require('./config/serverConfig')
@@ -13,9 +13,11 @@ const setupAndStartServer = async()=>{
     
     const app = express();
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended : true}))
+    app.use(bodyParser.urlencoded({extended : true}));
 
     app.use('/api', apiRoutes);
+
+    const channel = await createChannel() ;
     
     app.listen(PORT, ()=>{
         console.log(`Server listening on port ${PORT}`); 

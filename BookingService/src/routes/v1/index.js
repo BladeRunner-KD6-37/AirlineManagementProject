@@ -1,7 +1,13 @@
 const express =  require('express');
 const router = express.Router();
-const { BookingControllers }= require('../../controllers/index')
+const { BookingController } = require('../../controllers/index'); 
+// const { createChannel } = require('../../utils/messageQueue') ;
 
-router.post('/bookings', BookingControllers.create);
+// const channel = await createChannel() // needs to be an async function to use await so we need to go one level up
+const bookingController = new BookingController(channel) ;
 
+
+
+router.post('/bookings', bookingController.create);
+router.post('/publish', bookingController.sendMessageToQueue);
 module.exports = router;
