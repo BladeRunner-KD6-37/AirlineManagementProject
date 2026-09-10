@@ -1,31 +1,20 @@
 const cron = require('node-cron');
-const { TicketService } = require('../services/index');
+const { runReminder } = require('../services/reminder-service');
 
-/*
-10 : am
-every 5 minutes
-we will check are there any pending emails which were expected to be sent 
-by now and is pending
-*/
-
+/**
+ * Sets up scheduled jobs for the ReminderService.
+ * The cron expression can be configured via the REMINDER_CRON_EXPRESSION env var.
+ * Defaults to running every 2 minutes.
+ */
 const setupJobs = () => {
-    cron.schedule('*/2 * * * *', async () => {
-
-        const response = await TicketService.fetchPendingEmails();
-        for (const email of response) {
-            try {
-                await TicketService.sendBasicEmail(
-                    email.recipientEmail,
-                    email.subject,
-                    email.content);
-                await email.update({ status: 'SUCCESS' });
-            } catch (error) {
-                await email.update({ status: 'FAILED' });
-                console.error(`Failed to send notification ticket ${email.id}:`, error);
-            }
-        }
-        console.log(response)
-    })
-}
+  const cronExpression = process.env.REMINDER_CRON_EXPRESSION || '*/2 * * * *';
+  cron.schedule(cronExpression, async () => {
+    try {
+      await runReminder();
+    } catch (err) {
+      console.error('Error executing reminder job:', err);
+    }
+  });
+};
 
 module.exports = setupJobs;

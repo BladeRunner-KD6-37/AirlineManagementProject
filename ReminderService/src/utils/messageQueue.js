@@ -1,7 +1,6 @@
 const amqplib = require('amqplib');
-
-
-// create a channel 
+const { MESSAGE_BROKER_URL , EXCHANGE_NAME } = require('../config/serverConfig') ;
+ 
 
 const createChannel = async () => {
     try {
