@@ -1,4 +1,5 @@
 const amqplib = require('amqplib');
+const { MESSAGE_BROKER_URL, EXCHANGE_NAME } = require('../config/serverConfig');
 
 
 // create a channel 
@@ -7,7 +8,7 @@ const createChannel = async () => {
     try {
         const connection = await amqplib.connect(MESSAGE_BROKER_URL);
         const channel = await connection.createChannel();
-        await channel.assertExchange('EXCHANGE_NAME', 'direct', false);
+        await channel.assertExchange(EXCHANGE_NAME, 'direct', false);
         return channel;
 
     } catch (error) {
@@ -18,9 +19,9 @@ const createChannel = async () => {
 const subscribeMessage = async (channel, binding_key, message) => {
 
     try {
-        const applicationQueue = await channel.assetQueue('QUEUE_NAME');
+        const applicationQueue = await channel.assertQueue('QUEUE_NAME');
         channel.bind(applicationQueue.queue, EXCHANGE_NAME, binding_key); // establish the relationship b/w exchange appplication and application Queue.
-        channel.consume(applicationQueue, msg => {bn
+        channel.consume(applicationQueue.queue, msg => {
 
             console.log('received data');
             console.log(msg.content.toString());
